@@ -1,5 +1,10 @@
 const gallery=document.querySelector('#gallery'),viewer=document.querySelector('#viewer'),large=document.querySelector('#large');let current=0,previous;
-const photos=Array.from({length:9},(_,i)=>`images/photo-${i+1}.jpg`);
+const photos=[...Array.from({length:9},(_,i)=>`images/photo-${i+1}.jpg`),
+ 'images/微信图片_20260912235339_7_398.jpg',
+ 'images/微信图片_20260912235403_8_398.jpg',
+ 'images/微信图片_20260912235451_9_398.jpg',
+ 'images/微信图片_20260912235504_10_398.jpg',
+ 'images/微信图片_20260912235520_11_398.jpg'];
 function show(i){current=(i+photos.length)%photos.length;large.src=photos[current];large.alt=`Photo ${current+1}`;document.querySelector('#count').textContent=`${current+1} of ${photos.length}`;}
 photos.forEach((src,i)=>{const b=document.createElement('button');b.className='photo';b.setAttribute('aria-label',`Open photo ${i+1}`);const img=new Image();img.src=src;img.alt=`Photo ${i+1}`;img.loading='lazy';b.append(img);b.onclick=()=>{previous=b;show(i);viewer.showModal();document.body.style.overflow='hidden'};gallery.append(b)});
 document.querySelector('#close').onclick=()=>viewer.close();document.querySelector('#prev').onclick=()=>show(current-1);document.querySelector('#next').onclick=()=>show(current+1);
